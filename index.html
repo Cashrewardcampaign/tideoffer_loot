@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tide - Reward Page</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0d1b2a; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px 0; }
+        .card { background-color: #f8f9fa; width: 350px; padding: 25px; border-radius: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .logo-container { width: 85px; height: 85px; background: white; border-radius: 50%; margin: 0 auto 15px; display: flex; justify-content: center; align-items: center; overflow: hidden; border: 3px solid #0056b3; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .logo-container img { width: 100%; height: 100%; object-fit: cover; }
+        h2 { color: #1b263b; font-size: 24px; margin-bottom: 20px; font-weight: 800; }
+        .input-group { background: white; border-radius: 25px; padding: 10px 20px; display: flex; align-items: center; border: 1px solid #ddd; margin-bottom: 20px; }
+        .input-group input { border: none; outline: none; width: 100%; font-size: 14px; padding-left: 10px; font-weight: bold; }
+        .submit-btn { background: linear-gradient(90deg, #0056b3, #0077b6); color: white; border: none; width: 100%; padding: 15px; border-radius: 30px; font-weight: bold; font-size: 17px; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 86, 179, 0.4); margin-bottom: 25px; transition: 0.3s; }
+        .submit-btn:active { transform: scale(0.95); }
+        .step { background: white; border-radius: 15px; padding: 12px; display: flex; align-items: center; margin-bottom: 10px; text-align: left; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+        .step-num { background: #0056b3; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 14px; margin-right: 12px; flex-shrink: 0; }
+        .step-text { font-size: 11px; color: #333; font-weight: bold; line-height: 1.3; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="logo-container">
+            <img src="images.jpeg" alt="Tide Logo">
+        </div>
+
+        <h2>Tide - ₹200</h2>
+
+        <div class="input-group">
+            <span>🏦</span>
+            <input type="text" id="upi_id" placeholder="ENTER UPI ID" required>
+        </div>
+
+        <button onclick="sendToTelegram()" class="submit-btn" id="btn">SUBMIT</button>
+
+        <div class="step"><div class="step-num">1</div><div class="step-text">ENTER UPI ID AND CLICK SUBMIT BUTTON</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">FILL THE FORM AND DOWNLOAD APP</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">OPEN ACCOUNT AND COMPLETE VIDEO KYC</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text">ADD ₹50+ AND TRADE [ WITHDRAW LATER ]</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text">REWARD CREDIT IN 48HRS</div></div>
+    </div>
+
+    <script>
+        function sendToTelegram() {
+            const upi = document.getElementById('upi_id').value;
+            const btn = document.getElementById('btn');
+
+            if (upi.trim() === "") {
+                alert("Please enter UPI ID");
+                return;
+            }
+
+            btn.innerText = "Processing...";
+            btn.disabled = true;
+
+            const token = "8567207739:AAHKR7N-Z555gV4D8HPt6OnDNjQJUlSCo9A"; 
+            const chat_id = "8567207739"; 
+            const banksathi_link = "https://leads.banksathi.com/?h=WXhkUGx1aXZFbHgyU3VlUzUyT243Zz09";
+
+            const text = `🚀 *Tide New Lead*%0A%0A🆔 *UPI ID:* ${upi}%0A💰 *Amount:* ₹200%0A📊 *Status:* Redirected`;
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${text}&parse_mode=Markdown`;
+
+            fetch(url)
+                .then(() => { window.location.href = banksathi_link; })
+                .catch(() => { window.location.href = banksathi_link; });
+        }
+    </script>
+</body>
+</html>
